@@ -1,42 +1,43 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment'; 
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
-  categoryUrl: string = 'http://localhost:3001';
+  apiUrl: string = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) {}
 
   AddCategory(category: any) {
     return this.httpClient.post<{ message: any }>(
-      `${this.categoryUrl}/api/category/add`,
+      `${this.apiUrl}/api/category/add`,
       category
     );
   }
 
   allCategory() {
     return this.httpClient.get<{ category: any; nbr: any }>(
-      `${this.categoryUrl}/api/category/all`
+      `${this.apiUrl}/api/category/all`
     );
   }
 
   GetCategory(category: any) {
     return this.httpClient.get<{ category: any }>(
-      `${this.categoryUrl}/api/category/get/${category}`
+      `${this.apiUrl}/api/category/get/${category}`
     );
   }
 
   GetNumberProduct(category: any) {
     return this.httpClient.get<{ number: any }>(
-      `${this.categoryUrl}/api/category/number/${category}`
+      `${this.apiUrl}/api/category/number/${category}`
     );
   }
 
   GetPayment(category: any) {
     return this.httpClient.get<{ number: any }>(
-      `${this.categoryUrl}/api/category/payment/${category}`
+      `${this.apiUrl}/api/category/payment/${category}`
     );
   }
 }

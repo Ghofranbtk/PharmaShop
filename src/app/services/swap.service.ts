@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment'; 
 
 @Injectable({
   providedIn: 'root',
 })
 export class SwapService {
-  productUrl: string = 'http://localhost:3001';
+  apiUrl: string = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -19,7 +20,7 @@ export class SwapService {
     formData.append('img', img);
     formData.append('user', product.user);
     return this.httpClient.post<{ message: String; product: any }>(
-      `${this.productUrl}/api/swaps/products/add`,
+      `${this.apiUrl}/api/swaps/products/add`,
       formData
     );
   }
@@ -35,51 +36,51 @@ export class SwapService {
     formData.append('imgg', imgg);
     formData.append('user', product.user);
     return this.httpClient.post<{ message: String; product: any }>(
-      `${this.productUrl}/api/swaps/upload`,
+      `${this.apiUrl}/api/swaps/upload`,
       formData
     );
   }
 
   editProduct(product: any) {
     return this.httpClient.put<{ message: String }>(
-      `${this.productUrl}/api/swaps/editt/${product._id}`,
+      `${this.apiUrl}/api/swaps/editt/${product._id}`,
       product
     );
   }
 
   getAllproducts() {
     return this.httpClient.get<{ products: any; number: any }>(
-      `${this.productUrl}/api/swaps/products`
+      `${this.apiUrl}/api/swaps/products`
     );
   }
 
   deleteProduct(id: any) {
     return this.httpClient.delete<{ message: string }>(
-      `${this.productUrl}/api/swaps/delete/${id}`
+      `${this.apiUrl}/api/swaps/delete/${id}`
     );
   }
 
   GetProductInStock() {
     return this.httpClient.get<{ products: any }>(
-      `${this.productUrl}/api/swaps/instock`
+      `${this.apiUrl}/api/swaps/instock`
     );
   }
 
   getProductByCategory(id: any) {
     return this.httpClient.get<{ produit: any }>(
-      `${this.productUrl}/api/swaps/category/${id}`
+      `${this.apiUrl}/api/swaps/category/${id}`
     );
   }
 
   getProductById(id: any) {
     return this.httpClient.get<{ product: any }>(
-      `${this.productUrl}/api/swaps/products/${id}`
+      `${this.apiUrl}/api/swaps/products/${id}`
     );
   }
 
   getProductByUser(id: any) {
     return this.httpClient.get<{ product: any }>(
-      `${this.productUrl}/api/swaps/products/user/${id}`
+      `${this.apiUrl}/api/swaps/products/user/${id}`
     );
   }
 }
