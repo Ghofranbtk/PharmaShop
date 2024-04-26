@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment'; // Import environment
 
 @Injectable({
   providedIn: 'root',
 })
 export class BlogService {
-  blogUrl: string = 'http://localhost:3001';
+  apiUrl: string = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -19,7 +20,7 @@ export class BlogService {
     formData.append('description2', blog.description2);
     formData.append('date', blog.date);
     return this.httpClient.post<{ message: any; blog: any }>(
-      `${this.blogUrl}/api/blog/add`,
+      `${this.apiUrl}/api/blog/add`,
       formData
     );
   }
@@ -35,36 +36,36 @@ export class BlogService {
     formData.append('imgg', imgg);
     formData.append('date', blog.date);
     return this.httpClient.post<{ message: String }>(
-      `${this.blogUrl}/api/blog/upload`,
+      `${this.apiUrl}/api/blog/upload`,
       formData
     );
   }
 
   deleteBlog(id: any) {
     return this.httpClient.delete<{ message: string }>(
-      `${this.blogUrl}/api/blog/delete/${id}`
+      `${this.apiUrl}/api/blog/delete/${id}`
     );
   }
 
   GetHomeBlog() {
     return this.httpClient.get<{ blogs: any }>(
-      `${this.blogUrl}/api/blog/home-blog`
+      `${this.apiUrl}/api/blog/home-blog`
     );
   }
 
   getAllBlogs() {
     return this.httpClient.get<{ blogs: any }>(
-      `${this.blogUrl}/api/blog/blogs`
+      `${this.apiUrl}/api/blog/blogs`
     );
   }
 
   getBlogById(id: any) {
-    return this.httpClient.get<{ blog: any }>(`${this.blogUrl}/api/blog/${id}`);
+    return this.httpClient.get<{ blog: any }>(`${this.apiUrl}/api/blog/${id}`);
   }
 
   EditBlog(blog: any) {
     return this.httpClient.put<{ message: String }>(
-      `${this.blogUrl}/api/blog/editing/${blog._id}`,
+      `${this.apiUrl}/api/blog/editing/${blog._id}`,
       blog
     );
   }
@@ -80,7 +81,7 @@ export class BlogService {
     formData.append('imgg', blog.imgg);
     formData.append('date', blog.date);
     return this.httpClient.put<{ message: String; blog: any }>(
-      `${this.blogUrl}/api/blog/edit1/${blog._id}`,
+      `${this.apiUrl}/api/blog/edit1/${blog._id}`,
       formData
     );
   }
@@ -96,7 +97,7 @@ export class BlogService {
     formData.append('imgg', imgg);
     formData.append('date', blog.date);
     return this.httpClient.put<{ message: String }>(
-      `${this.blogUrl}/api/blog/edite2/${blog._id}`,
+      `${this.apiUrl}/api/blog/edite2/${blog._id}`,
       formData
     );
   }

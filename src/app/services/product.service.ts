@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment'; 
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  productUrl: string = 'http://localhost:3001';
+  apiUrl: string = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -22,7 +23,7 @@ export class ProductService {
     formData.append('solde', product.solde);
     formData.append('remise', product.remise);
     return this.httpClient.post<{ message: String; product: any }>(
-      `${this.productUrl}/api/products/products/add`,
+      `${this.apiUrl}/api/products/products/add`,
       formData
     );
   }
@@ -41,14 +42,14 @@ export class ProductService {
     formData.append('new_price', product.new_price);
     formData.append('imgg', imgg);
     return this.httpClient.post<{ message: String; product: any }>(
-      `${this.productUrl}/api/products/upload`,
+      `${this.apiUrl}/api/products/upload`,
       formData
     );
   }
 
   editProduct(product: any) {
     return this.httpClient.put<{ message: String }>(
-      `${this.productUrl}/api/products/editt/${product._id}`,
+      `${this.apiUrl}/api/products/editt/${product._id}`,
       product
     );
   }
@@ -66,7 +67,7 @@ export class ProductService {
     formData.append('solde', product.solde);
     formData.append('remise', product.remise);
     return this.httpClient.put<{ message: String; product: any }>(
-      `${this.productUrl}/api/products/edit1/${product._id}`,
+      `${this.apiUrl}/api/products/edit1/${product._id}`,
       formData
     );
   }
@@ -85,89 +86,89 @@ export class ProductService {
     formData.append('new_price', product.new_price);
     formData.append('imgg', imgg);
     return this.httpClient.put<{ message: String }>(
-      `${this.productUrl}/api/products/edit2/${product._id}`,
+      `${this.apiUrl}/api/products/edit2/${product._id}`,
       formData
     );
   }
 
   getAllproducts() {
     return this.httpClient.get<{ products: any; number: any }>(
-      `${this.productUrl}/api/products/products`
+      `${this.apiUrl}/api/products/products`
     );
   }
 
   GetProductInStock() {
     return this.httpClient.get<{ products: any }>(
-      `${this.productUrl}/api/products/instock`
+      `${this.apiUrl}/api/products/instock`
     );
   }
 
   gettrends() {
     return this.httpClient.get<{ trend: any }>(
-      `${this.productUrl}/api/products/trends`
+      `${this.apiUrl}/api/products/trends`
     );
   }
 
   getProductById(id: any) {
     return this.httpClient.get<{ product: any }>(
-      `${this.productUrl}/api/products/products/${id}`
+      `${this.apiUrl}/api/products/products/${id}`
     );
   }
 
   getProductByName(name: any) {
     return this.httpClient.get<{ product: any }>(
-      `${this.productUrl}/api/products/product/${name}`
+      `${this.apiUrl}/api/products/product/${name}`
     );
   }
 
   deleteProduct(id: any) {
     return this.httpClient.delete<{ message: string }>(
-      `${this.productUrl}/api/products/delete/${id}`
+      `${this.apiUrl}/api/products/delete/${id}`
     );
   }
 
   searchByName(trainerObj: any) {
     return this.httpClient.post<{ findedProduct: any; message: string }>(
-      `${this.productUrl}/api/product/search/trainerName`,
+      `${this.apiUrl}/api/product/search/trainerName`,
       trainerObj
     );
   }
   getProductByCategory(id: any) {
     return this.httpClient.get<{ produit: any }>(
-      `${this.productUrl}/api/products/category/${id}`
+      `${this.apiUrl}/api/products/category/${id}`
     );
   }
 
   DeleteQuantity(product: any) {
     return this.httpClient.post<{ message: any }>(
-      `${this.productUrl}/api/products/delete/quantity`,
+      `${this.apiUrl}/api/products/delete/quantity`,
       product
     );
   }
 
   LatestArrivals() {
     return this.httpClient.get<{ produits: any }>(
-      `${this.productUrl}/api/products/latest`
+      `${this.apiUrl}/api/products/latest`
     );
   }
 
   LowerProduct(product: any) {
     return this.httpClient.post<{ product: any }>(
-      `${this.productUrl}/api/products/lower`,
+      `${this.apiUrl}/api/products/lower`,
       product
     );
   }
 
   HighProduct(product: any) {
     return this.httpClient.post<{ product: any }>(
-      `${this.productUrl}/api/products/high`,
+      `${this.apiUrl}/api/products/high`,
       product
     );
   }
 
   HomeProducts() {
     return this.httpClient.get<{ product: any }>(
-      `${this.productUrl}/api/products/shop_home`
+      `${this.apiUrl}/api/products/shop_home`
     );
   }
 }

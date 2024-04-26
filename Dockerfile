@@ -16,9 +16,10 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Build the Angular app for production
-RUN ng build 
+# Replace environment file based on build configuration
+ARG configuration=production
+RUN ng build --configuration $configuration
 
 # Use NGINX to serve the Angular app in production
 FROM nginx:alpine
-COPY --from=builder /app/dist/pharma-front /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html

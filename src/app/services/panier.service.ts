@@ -1,57 +1,58 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment'; 
 
 @Injectable({
   providedIn: 'root',
 })
 export class PanierService {
-  panierUrl: string = 'http://localhost:3001';
+  apiUrl: string = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) {}
 
   getAllproduct(id: any) {
     return this.httpClient.get<{ panier: any }>(
-      `${this.panierUrl}/api/panier/panier/${id}`
+      `${this.apiUrl}/api/panier/panier/${id}`
     );
   }
 
   AddPanierS(product: any) {
     return this.httpClient.post<{ panier: any; message: any }>(
-      `${this.panierUrl}/api/panier/product/add-swap`,
+      `${this.apiUrl}/api/panier/product/add-swap`,
       product
     );
   }
 
   AddPanier(product: any) {
     return this.httpClient.post<{ panier: any; message: any }>(
-      `${this.panierUrl}/api/panier/product/add`,
+      `${this.apiUrl}/api/panier/product/add`,
       product
     );
   }
 
   AddCart(product: any) {
     return this.httpClient.post<{ panier: any; message: any }>(
-      `${this.panierUrl}/api/panier/cart/add`,
+      `${this.apiUrl}/api/panier/cart/add`,
       product
     );
   }
 
   AddCartS(product: any) {
     return this.httpClient.post<{ panier: any; message: any }>(
-      `${this.panierUrl}/api/panier/cart/add_swap`,
+      `${this.apiUrl}/api/panier/cart/add_swap`,
       product
     );
   }
 
   TotalPrice(id: any) {
     return this.httpClient.get<{ prices: any; nbr: number }>(
-      `${this.panierUrl}/api/panier/panier/prices/${id}`
+      `${this.apiUrl}/api/panier/panier/prices/${id}`
     );
   }
 
   addProductInBasket(panier: any) {
     return this.httpClient.post<{ result: any }>(
-      `${this.panierUrl}/api/panier/bascket/add`,
+      `${this.apiUrl}/api/panier/bascket/add`,
       panier
     );
   }
@@ -61,20 +62,20 @@ export class PanierService {
     // formData.append('panier',panier);
     // formData.append('id',id);
     return this.httpClient.post<{ result: any; message: any }>(
-      `${this.panierUrl}/api/panier/bascket/delete`,
+      `${this.apiUrl}/api/panier/bascket/delete`,
       panier
     );
   }
   DeleteProduct(panier: any) {
     return this.httpClient.post<{ result: any; number: number }>(
-      `${this.panierUrl}/api/panier/bascket/delete/product`,
+      `${this.apiUrl}/api/panier/bascket/delete/product`,
       panier
     );
   }
 
   getProductByID(product: any) {
     return this.httpClient.post<{ pro: any; message: String }>(
-      `${this.panierUrl}/api/panier/products`,
+      `${this.apiUrl}/api/panier/products`,
       product
     );
   }
